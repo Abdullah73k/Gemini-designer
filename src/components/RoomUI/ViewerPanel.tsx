@@ -30,7 +30,7 @@ export default function ViewerPanel() {
               lighting controls, and camera helpers.
             </p>
             <p className="mt-4 text-xs uppercase tracking-[0.3em] text-slate-400">
-              // TODO: Integrate RoomViewer in Feature 8
+
             </p>
           </div>
         </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { useChat } from "@ai-sdk/react";
 import type { APIResponse, LayoutResponse } from "@/types/models";
 import { Button } from "@/components/ui/button";
@@ -38,89 +38,108 @@ const randomId = () =>
  * Chat-driven control panel for authoring Gemini layout prompts.
  */
 export default function ChatPanel() {
-	const { messages, setMessages, input, handleInputChange, setInput } = useChat(
-		{
-			api: "/api/generate",
-		}
-	);
+	const { messages, setMessages } = useChat();
+	const [description, setDescription] = useState<string>("");
 	const [style, setStyle] = useState<string>("cozy");
 	const [temperature, setTemperature] = useState<number>(0.2);
 	const [isPending, setIsPending] = useState(false);
 	const [errorMessage, setErrorMessage] = useState<string | null>(null);
 	const [responseOpen, setResponseOpen] = useState(true);
+	const [lastLayout, setLastLayout] = useState<LayoutResponse | null>(null);
 
-	const latestAssistant = useMemo(
-		() => [...messages].reverse().find((msg) => msg.role === "assistant"),
-		[messages]
-	);
+	// Derive latest assistant text for display when no structured layout is present yet.
+	const latestAssistantText = useMemo(() => {
+		const reversed = [...messages].reverse();
+		const candidate = reversed.find(
+			(m) => (m as { role?: string }).role === "assistant"
+		) as
+			| { parts?: Array<{ type: string; text?: string }>; content?: unknown }
+			| undefined;
+		if (!candidate) return undefined;
+		if (Array.isArray(candidate.parts)) {
+			const text = candidate.parts
+				.filter((p) => p?.type === "text" && typeof p.text === "string")
+				.map((p) => p.text as string)
+				.join("\n");
+			return text || undefined;
+		}
+		return typeof candidate.content === "string"
+			? (candidate.content as string)
+			: undefined;
+	}, [messages]);
 
-	const handleSubmit = useCallback(
-		async (event: React.FormEvent<HTMLFormElement>) => {
-			event.preventDefault();
-			const trimmed = input.trim();
+	async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+		event.preventDefault();
+		const trimmed = description.trim();
+		if (!trimmed) {
+			setErrorMessage("Please describe the room you want to generate.");
+			return;
+		}
 
-			if (!trimmed) {
-				setErrorMessage("Please describe the room you want to generate.");
-				return;
-			}
+		setIsPending(true);
+		setErrorMessage(null);
+		setResponseOpen(true);
+		setLastLayout(null);
 
-			setIsPending(true);
-			setErrorMessage(null);
-			setResponseOpen(true);
-
-			const userMessage: Message = {
+		// Append the user message using the UI message parts format.
+		setMessages((prev) => [
+			...prev,
+			{
 				id: randomId(),
 				role: "user",
-				content: trimmed,
-			};
-			setMessages((prev) => [...prev, userMessage]);
+				parts: [{ type: "text", text: trimmed }],
+			} as unknown as (typeof prev)[number],
+		]);
 
-			const payload: Record<string, unknown> = {
-				description: trimmed,
-				temperature,
-			};
-			if (style) payload.style = style;
+		const payload: Record<string, unknown> = {
+			description: trimmed,
+			temperature,
+		};
+		if (style) payload.style = style;
 
-			try {
-				const response = await fetch("/api/generate", {
-					method: "POST",
-					headers: { "Content-Type": "application/json" },
-					body: JSON.stringify(payload),
-				});
+		try {
+			const response = await fetch("/api/generate", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify(payload),
+			});
+			const json = (await response.json()) as APIResponse<LayoutResponse>;
 
-				const json = (await response.json()) as APIResponse<LayoutResponse>;
-
-				if (!response.ok || !json.ok || !json.data) {
-					throw new Error(
-						json.error ?? `Request failed with status ${response.status}`
-					);
-				}
-
-				const assistantMessage: Message = {
-					id: randomId(),
-					role: "assistant",
-					content: JSON.stringify(json.data, null, 2),
-				};
-				setMessages((prev) => [...prev, assistantMessage]);
-			} catch (error) {
-				const message =
-					error instanceof Error
-						? error.message
-						: "Something went wrong while generating.";
-				const assistantMessage: Message = {
-					id: randomId(),
-					role: "assistant",
-					content: `Error: ${message}`,
-				};
-				setMessages((prev) => [...prev, assistantMessage]);
-				setErrorMessage(message);
-			} finally {
-				setIsPending(false);
-				setInput("");
+			if (!response.ok || !json.ok || !json.data) {
+				throw new Error(
+					json.error ?? `Request failed with status ${response.status}`
+				);
 			}
-		},
-		[input, style, temperature, setMessages, setInput]
-	);
+
+			const pretty = JSON.stringify(json.data, null, 2);
+			setMessages((prev) => [
+				...prev,
+				{
+					id: randomId(),
+					role: "assistant",
+					parts: [{ type: "text", text: pretty }],
+				} as unknown as (typeof prev)[number],
+			]);
+			setLastLayout(json.data);
+		} catch (err) {
+			const message =
+				err instanceof Error
+					? err.message
+					: "Something went wrong while generating.";
+			setMessages((prev) => [
+				...prev,
+				{
+					id: randomId(),
+					role: "assistant",
+					parts: [{ type: "text", text: `Error: ${message}` }],
+				} as unknown as (typeof prev)[number],
+			]);
+			setErrorMessage(message);
+		} finally {
+			setIsPending(false);
+			setDescription("");
+		}
+	}
 
 	return (
 		<Card className="border-white/10 bg-white/5 text-slate-100 backdrop-blur-xl">
@@ -142,8 +161,8 @@ export default function ChatPanel() {
 						<Textarea
 							id="description"
 							placeholder="Cozy gaming room with LED strips and dual monitors..."
-							value={input}
-							onChange={handleInputChange}
+							value={description}
+							onChange={(e) => setDescription(e.target.value)}
 							disabled={isPending}
 							className="min-h-[120px] resize-none border-white/10 bg-white/10 text-slate-100 placeholder:text-slate-400"
 						/>
@@ -231,7 +250,25 @@ export default function ChatPanel() {
 										{message.role}
 									</p>
 									<p className="whitespace-pre-wrap text-slate-100">
-										{message.content}
+										{Array.isArray(
+											(
+												message as {
+													parts?: Array<{ type: string; text?: string }>;
+												}
+											).parts
+										)
+											? (
+													message as {
+														parts?: Array<{ type: string; text?: string }>;
+													}
+											  )
+													.parts!.filter(
+														(p) =>
+															p?.type === "text" && typeof p.text === "string"
+													)
+													.map((p) => p.text as string)
+													.join("\n")
+											: (message as { content?: string }).content}
 									</p>
 								</div>
 							))}
@@ -254,9 +291,10 @@ export default function ChatPanel() {
 						{responseOpen && (
 							<CardContent>
 								{/* TODO: Replace <pre> with react-syntax-highlighter once the dependency is available. */}
-								<pre className="max-h-56 overflow-y-auto rounded-lg bg-black/50 p-4 text-xs text-emerald-200">
-									{latestAssistant?.content ??
-										"// Gemini JSON will appear here."}
+								<pre className="max-h-56 overflow-y-auto rounded-lg bg-black/50 p-4 text-xs text-emerald-200 whitespace-pre-wrap font-mono">
+									{lastLayout
+										? JSON.stringify(lastLayout, null, 2)
+										: latestAssistantText ?? "// Gemini JSON will appear here."}
 								</pre>
 							</CardContent>
 						)}
