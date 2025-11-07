@@ -48,25 +48,42 @@ export async function POST(req: NextRequest): Promise<Response> {
       ? `${description.trim()} style:${style.trim()}`
       : description.trim();
 
-    const models: ModelsJson = await getModels();
-    const candidates = getTopKModels(models, descriptionWithStyle, TOP_K);
-    console.info("[api/generate] candidate_count=%d", candidates.length);
+    console.info("[api/chat] request", {
+      desc_len: descriptionWithStyle.length,
+      style: style ?? null,
+      temperature,
+      has_previous_layout: Boolean(previousLayout),
+    });
 
-    const systemPrompt = buildSystemPrompt(candidates, previousLayout ?? undefined);
-    console.debug(
-      "[api/generate] system_prompt_chars=%d",
-      systemPrompt.length
-    );
-
-    const raw = await callGemini(descriptionWithStyle, candidates, temperature);
-    const parsed = safeParseLayout(raw);
-
-    if (!parsed.room || !Array.isArray(parsed.objects)) {
+    // Fast-fail when Gemini credentials are not configured to avoid dev overlay HTML.
+    if (!process.env.GOOGLE_GENERATIVE_AI_API_KEY) {
       return Response.json(
-        { ok: false, error: "Malformed layout: missing room/objects" },
-        { status: 500 }
+        {
+          ok: false,
+          error:
+            "Missing GOOGLE_GENERATIVE_AI_API_KEY. Set it in your environment to enable layout generation.",
+        },
+        { status: 503 }
       );
     }
+
+    const models: ModelsJson = await getModels();
+    const modelCount = Object.keys(models).length;
+    console.info("[api/chat] models_loaded", { count: modelCount });
+    const candidates = getTopKModels(models, descriptionWithStyle, TOP_K);
+    console.info("[api/chat] candidate_count=%d", candidates.length);
+    console.debug(
+      "[api/chat] candidates_sample",
+      candidates.slice(0, 5).map((m) => ({ path: m.path, tags: (m.tags || []).slice(0, 3) }))
+    );
+
+    const systemPrompt = buildSystemPrompt(candidates, previousLayout ?? undefined);
+    console.debug("[api/chat] system_prompt_chars=%d", systemPrompt.length);
+
+    const raw = await callGemini(descriptionWithStyle, candidates, temperature);
+    console.debug("[api/chat] raw_chars=%d", raw.length);
+    console.debug("[api/chat] raw_snippet", raw.slice(0, RAW_SNIPPET_LIMIT));
+    const parsed = safeParseLayout(raw);
 
     // Clamp positions, snap to grid, and resolve overlaps before returning.
     const clean = sanitizeLayout(parsed, {
@@ -79,7 +96,7 @@ export async function POST(req: NextRequest): Promise<Response> {
       data: clean,
     });
   } catch (error) {
-    console.error("[api/generate] Unexpected error", error);
+    console.error("[api/chat] Unexpected error", error);
     const message =
       error instanceof Error ? error.message : "Failed to generate layout.";
     return Response.json(
@@ -114,13 +131,24 @@ function safeParseLayout(raw: string): LayoutResponse {
   try {
     return JSON.parse(raw) as LayoutResponse;
   } catch {
+    console.warn("[api/chat] direct JSON.parse failed; trying fenced block");
+    // Try extracting fenced JSON first, e.g., ```json { ... } ```
+    const fence = raw.match(/```(?:json)?\s*([\s\S]*?)\s*```/i);
+    if (fence && fence[1]) {
+      try {
+        return JSON.parse(fence[1]) as LayoutResponse;
+      } catch {
+        console.warn("[api/chat] fenced JSON parse failed; trying first brace block");
+      }
+    }
+
     // Regex fallback to capture the first JSON block (Gemini sometimes adds chatter).
     const match = raw.match(/\{[\s\S]*\}/);
     if (match) {
       try {
         return JSON.parse(match[0]) as LayoutResponse;
       } catch {
-        // fall through
+        console.warn("[api/chat] brace block parse failed; giving up");
       }
     }
     const snippet = raw.slice(0, RAW_SNIPPET_LIMIT);
