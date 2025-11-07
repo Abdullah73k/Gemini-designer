@@ -1,36 +1,132 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# RoomCrafter AI — Text → 3D room layouts in seconds
 
-## Getting Started
+## Hackathon Context
+Built at **DeltaHacks Lite** in ~**1.5 hours**. The focus was a working end‑to‑end pipeline for “Best use of Gemini”: natural‑language room descriptions → strict JSON layout → live 3D scene.
 
-First, run the development server:
+## What It Does
+- You describe a room (style, furniture, vibe).
+- The backend prompts Google Gemini (via Vercel AI SDK) to return a **strict JSON** layout (objects, sizes, positions, rotations, rationale).
+- The frontend renders low‑poly GLB assets into a room with a light **sanitizer** to snap to grid, clamp to bounds, and nudge overlaps.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Architecture (High‑Level)
+- 3D asset pipeline: GLB models → metadata script → `public/models.json`.
+- Retriever: select top‑K candidate models (from `models.json`) to keep the prompt compact.
+- Gemini via Vercel AI SDK: system prompt enforces a strict `LayoutResponse` schema.
+- API route: Next.js App Router endpoint (`/api/generate` — see note below).
+- Sanitizer: grid snap (0.1m), clamp to room, simple AABB separation, set floor Y = h/2 when missing.
+- UI: Left = chat (useChat), Right = live 3D (react‑three‑fiber + drei).
+
+```
+Text prompt → Retriever (top‑K from models.json) → Gemini (strict JSON)
+           → /api/generate → Sanitize → Viewer (GLB load) → 3D scene
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Note: This repo currently exposes `/api/chat` (used by the UI) and also contains `/api/generate` from an earlier iteration. TODO: unify on one route name.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## models.json (How It’s Produced & Used)
+A small Node script (not included here — see TODO) scans low‑poly GLBs and precomputes a manifest at `public/models.json` with fields:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| field | purpose |
+|---|---|
+| `path` | Public URL under `/models/...` (served from `/public/models/...`). |
+| `w`,`d`,`h` | Dimensions in meters (width, depth, height). |
+| `bbox_min`,`bbox_max` | AABB corners in meters. |
+| `pivot` | Local pivot in meters. |
+| `anchors` | Optional named anchor points (meters). |
+| `tags` | Search keywords (e.g., desk, wood, modern). |
+| `margin` | Recommended clearance in meters. |
 
-## Learn More
+- Assets live under: `/public/models/lowpoly-room/*`.
+- Names + tags enable retrieval (e.g., `desk_basic`, `chair_gaming`).
 
-To learn more about Next.js, take a look at the following resources:
+## Prompting & Gemini (Large Context + Strict Schema)
+- The top‑K candidate slice (keys + w/d/h + optional anchors) is injected into the **system prompt** so Gemini picks valid assets.
+- The full `models.json` is also included (compactly), improving key/path awareness.
+- Gemini must return a single JSON object with shape:
+  - `room` { `width_m`, `depth_m`, `height_m`, `floor_material?`, `wall_color?` }
+  - `objects[]` { `id`, `type?`, `model: "gltf:<key>"`, `position_m`, `rotation_deg`, ... }
+  - `rationale` short string
+- Model is configurable via env. Suggested: **Gemini 1.5** variants (Pro/Flash) for large context + creative placement. Temperature controls creativity.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Backend (Next.js App Router)
+- Primary route in this repo: `src/app/api/chat/route.ts` (UI calls this).
+- Earlier spec/compat route also exists: `src/app/api/generate/route.ts`.
+- Responsibilities:
+  - Validate request, load `public/models.json`.
+  - Retrieve top‑K candidates; build a strict, placement‑aware system prompt.
+  - Call Gemini via Vercel AI SDK; extract JSON (regex + fenced fallback).
+  - Normalize common variants (e.g., `model_id` → `model`, arrays → `position_m`).
+  - Sanitize: snap to 0.1m, clamp to room, set floor `y = h/2` when missing, simple overlap nudge.
+  - Return `{ ok, data | error }`.
+- Env:
+  - `GOOGLE_GENERATIVE_AI_API_KEY` (required).
+  - `GEMINI_MODEL` (optional; defaults to `models/gemini-1.5-flash`).
+  - TODO: Document any rate limits or quotas for the chosen model.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Frontend (UI + 3D)
+- Left panel (≈30%): `useChat` UI (Vercel AI SDK UI). Custom submit posts JSON to `/api/chat`, shows pretty JSON, and dispatches `layout:update` on success.
+- Right panel (≈70%): `react-three-fiber` viewer:
+  - Canvas + ambient/directional lights (no black scene) + light gray floor sized to room.
+  - GLB loading using `models.json.path`. If `position_m.y` missing, viewer sets `y = h/2`.
+  - Optional primitives when `construction` is provided (boxes/cylinders/planes).
+  - Updates live via a `window` CustomEvent: `layout:update`.
 
-## Deploy on Vercel
+## Repo Layout (Brief)
+- `src/app/api/chat/route.ts` — current API used by the UI.
+- `src/app/api/generate/route.ts` — earlier route matching the spec.
+- `src/components/RoomUI/*` — Chat/UI and viewer panel.
+- `src/components/Three/*` — `RoomViewer`, `SceneObjects`, `GLTFModel`, `PrimitiveBuilder`.
+- `src/lib/*` — `models` (manifest I/O), `retriever`, `geminiClient`, `modelLoader`.
+- `public/models/lowpoly-room/*` — low‑poly GLBs.
+- `public/models.json` — precomputed manifest.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Getting Started (Local)
+**Prereqs**: Node 18+, pnpm.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Install:
+```bash
+pnpm install
+```
+
+Env (create `.env.local`):
+```bash
+# Google provider key for Gemini (used by @ai-sdk/google)
+GOOGLE_GENERATIVE_AI_API_KEY=your_key_here
+# Optional: override the default model
+GEMINI_MODEL=models/gemini-1.5-flash
+```
+
+Run:
+```bash
+pnpm dev
+```
+Open: http://localhost:3000
+
+## Quick Test
+- In the left panel, try: “Cozy low‑poly gaming room with desk, chair, bookshelf.”
+- Expect: JSON response + 3D with floor + lights + GLBs from `/public/models/lowpoly-room`.
+- If the scene is dark/empty: open DevTools and confirm:
+  - The viewer logs a resolved path like `/models/lowpoly-room/desk_basic.glb`.
+  - Opening that URL serves a GLB.
+  - `public/models.json` paths start with `/models/...`.
+
+## Troubleshooting
+- Black scene: ensure the ambient/directional lights exist; the Canvas background is not pure black.
+- Model not found: missing key in `models.json` or wrong path (should start with `/models/`).
+- Invalid JSON: system prompt enforces JSON‑only; the route has a regex/fenced fallback parser.
+- Overlaps/spacing: sanitizer snaps/clamps and applies a simple AABB nudge; reduce item count if still dense.
+
+## Constraints & Future Work
+- Time‑boxed hackathon prototype (1.5h): small catalog, minimal sanitizer, no walls/HDRI.
+- Next:
+  - Scripted manifest generator (CLI) — TODO: add `scripts/build-models-json.ts`.
+  - Larger catalogs + richer anchors/walls.
+  - Export screenshots/GLTF; budgeting/constraints; better lighting/materials.
+  - Unify on `/api/chat` or `/api/generate`.
+
+## Credits
+- Built at **DeltaHacks Lite**. Thanks to the organizers and mentors.
+- Libraries: **Next.js**, **Vercel AI SDK**, **@ai-sdk/google**, **react‑three‑fiber**, **drei**, **Tailwind**/**shadcn/ui**.
+
+— Thanks for reading! Devpost: (link coming soon)
+
