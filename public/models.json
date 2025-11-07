@@ -1,0 +1,1472 @@
+{
+	"game_console_controller_video_game_ps4": {
+		"path": "/models/gaming-room/game_console_controller_video_game_ps4.glb",
+		"w": 0.265,
+		"d": 0.283,
+		"h": 0.062,
+		"bbox_min": {
+			"x": -0.133,
+			"y": -0.022,
+			"z": -0.133
+		},
+		"bbox_max": {
+			"x": 0.133,
+			"y": 0.04,
+			"z": 0.15
+		},
+		"pivot": {
+			"x": 0,
+			"y": -0.022,
+			"z": 0.008
+		},
+		"anchors": {
+			"top_center": {
+				"x": 0,
+				"y": 0.04,
+				"z": 0.008
+			},
+			"center": {
+				"x": 0,
+				"y": 0.009,
+				"z": 0.008
+			}
+		},
+		"tags": ["game", "console", "controller", "video", "ps4"],
+		"margin": 0.05
+	},
+	"gaming_chair_white": {
+		"path": "/models/gaming-room/gaming_chair_white.glb",
+		"w": 2.298,
+		"d": 2.194,
+		"h": 4.513,
+		"bbox_min": {
+			"x": -1.193,
+			"y": 0.009,
+			"z": -1.384
+		},
+		"bbox_max": {
+			"x": 1.105,
+			"y": 4.522,
+			"z": 0.81
+		},
+		"pivot": {
+			"x": -0.044,
+			"y": 0.009,
+			"z": -0.287
+		},
+		"anchors": {
+			"top_center": {
+				"x": -0.044,
+				"y": 4.522,
+				"z": -0.287
+			},
+			"center": {
+				"x": -0.044,
+				"y": 2.265,
+				"z": -0.287
+			}
+		},
+		"tags": ["gaming", "chair", "white"],
+		"margin": 0.05
+	},
+	"air_hockey_lowpoly": {
+		"path": "/models/lowpoly-room/air_hockey_lowpoly.glb",
+		"w": 2.055,
+		"d": 1.476,
+		"h": 1.353,
+		"bbox_min": {
+			"x": -1.028,
+			"y": -0.327,
+			"z": -0.737
+		},
+		"bbox_max": {
+			"x": 1.027,
+			"y": 1.026,
+			"z": 0.739
+		},
+		"pivot": {
+			"x": 0,
+			"y": -0.327,
+			"z": 0.001
+		},
+		"anchors": {
+			"top_center": {
+				"x": 0,
+				"y": 1.026,
+				"z": 0.001
+			},
+			"center": {
+				"x": 0,
+				"y": 0.349,
+				"z": 0.001
+			}
+		},
+		"tags": ["air", "hockey", "lowpoly"],
+		"margin": 0.05
+	},
+	"bed_lowpoly": {
+		"path": "/models/lowpoly-room/bed_lowpoly.glb",
+		"w": 1.115,
+		"d": 2.213,
+		"h": 0.623,
+		"bbox_min": {
+			"x": -0.562,
+			"y": 0,
+			"z": -1.106
+		},
+		"bbox_max": {
+			"x": 0.553,
+			"y": 0.623,
+			"z": 1.106
+		},
+		"pivot": {
+			"x": -0.004,
+			"y": 0,
+			"z": 0
+		},
+		"anchors": {
+			"top_center": {
+				"x": -0.004,
+				"y": 0.623,
+				"z": 0
+			},
+			"center": {
+				"x": -0.004,
+				"y": 0.311,
+				"z": 0
+			}
+		},
+		"tags": ["bed", "lowpoly"],
+		"margin": 0.05
+	},
+	"camera_lowpoly": {
+		"path": "/models/lowpoly-room/camera_lowpoly.glb",
+		"w": 0.158,
+		"d": 0.14,
+		"h": 0.102,
+		"bbox_min": {
+			"x": -0.072,
+			"y": 0,
+			"z": -0.029
+		},
+		"bbox_max": {
+			"x": 0.085,
+			"y": 0.102,
+			"z": 0.111
+		},
+		"pivot": {
+			"x": 0.006,
+			"y": 0,
+			"z": 0.041
+		},
+		"anchors": {
+			"top_center": {
+				"x": 0.006,
+				"y": 0.102,
+				"z": 0.041
+			},
+			"center": {
+				"x": 0.006,
+				"y": 0.051,
+				"z": 0.041
+			}
+		},
+		"tags": ["camera", "lowpoly"],
+		"margin": 0.05
+	},
+	"cat_scratching_post_lowpoly": {
+		"path": "/models/lowpoly-room/cat_scratching_post_lowpoly.glb",
+		"w": 0.699,
+		"d": 0.443,
+		"h": 1.184,
+		"bbox_min": {
+			"x": -0.309,
+			"y": 0,
+			"z": -0.221
+		},
+		"bbox_max": {
+			"x": 0.389,
+			"y": 1.184,
+			"z": 0.222
+		},
+		"pivot": {
+			"x": 0.04,
+			"y": 0,
+			"z": 0.001
+		},
+		"anchors": {
+			"top_center": {
+				"x": 0.04,
+				"y": 1.184,
+				"z": 0.001
+			},
+			"center": {
+				"x": 0.04,
+				"y": 0.592,
+				"z": 0.001
+			}
+		},
+		"tags": ["cat", "scratching", "post", "lowpoly"],
+		"margin": 0.05
+	},
+	"closet_blue_lowpoly": {
+		"path": "/models/lowpoly-room/closet_blue_lowpoly.glb",
+		"w": 0.4,
+		"d": 0.275,
+		"h": 1.961,
+		"bbox_min": {
+			"x": -0.2,
+			"y": 0,
+			"z": -0.125
+		},
+		"bbox_max": {
+			"x": 0.2,
+			"y": 1.961,
+			"z": 0.15
+		},
+		"pivot": {
+			"x": 0,
+			"y": 0,
+			"z": 0.012
+		},
+		"anchors": {
+			"top_center": {
+				"x": 0,
+				"y": 1.961,
+				"z": 0.012
+			},
+			"center": {
+				"x": 0,
+				"y": 0.981,
+				"z": 0.012
+			}
+		},
+		"tags": ["closet", "blue", "lowpoly"],
+		"margin": 0.05
+	},
+	"closet_white_black_lowpoly": {
+		"path": "/models/lowpoly-room/closet_white_black_lowpoly.glb",
+		"w": 1.277,
+		"d": 0.729,
+		"h": 2.688,
+		"bbox_min": {
+			"x": -0.639,
+			"y": 0,
+			"z": -0.347
+		},
+		"bbox_max": {
+			"x": 0.639,
+			"y": 2.688,
+			"z": 0.381
+		},
+		"pivot": {
+			"x": 0,
+			"y": 0,
+			"z": 0.017
+		},
+		"anchors": {
+			"top_center": {
+				"x": 0,
+				"y": 2.688,
+				"z": 0.017
+			},
+			"center": {
+				"x": 0,
+				"y": 1.344,
+				"z": 0.017
+			}
+		},
+		"tags": ["closet", "white", "black", "lowpoly"],
+		"margin": 0.05
+	},
+	"coffee_machine_lowpoly": {
+		"path": "/models/lowpoly-room/coffee_machine_lowpoly.glb",
+		"w": 0.235,
+		"d": 0.335,
+		"h": 0.342,
+		"bbox_min": {
+			"x": -0.118,
+			"y": 0,
+			"z": -0.134
+		},
+		"bbox_max": {
+			"x": 0.118,
+			"y": 0.341,
+			"z": 0.201
+		},
+		"pivot": {
+			"x": 0,
+			"y": 0,
+			"z": 0.033
+		},
+		"anchors": {
+			"top_center": {
+				"x": 0,
+				"y": 0.341,
+				"z": 0.033
+			},
+			"center": {
+				"x": 0,
+				"y": 0.17,
+				"z": 0.033
+			}
+		},
+		"tags": ["coffee", "machine", "lowpoly"],
+		"margin": 0.05
+	},
+	"coffee_table_brown_lowpoly": {
+		"path": "/models/lowpoly-room/coffee_table_brown_lowpoly.glb",
+		"w": 1.718,
+		"d": 1.034,
+		"h": 0.295,
+		"bbox_min": {
+			"x": -0.859,
+			"y": 0,
+			"z": -0.526
+		},
+		"bbox_max": {
+			"x": 0.859,
+			"y": 0.295,
+			"z": 0.508
+		},
+		"pivot": {
+			"x": 0,
+			"y": 0,
+			"z": -0.009
+		},
+		"anchors": {
+			"top_center": {
+				"x": 0,
+				"y": 0.295,
+				"z": -0.009
+			},
+			"center": {
+				"x": 0,
+				"y": 0.148,
+				"z": -0.009
+			}
+		},
+		"tags": ["coffee", "table", "brown", "lowpoly"],
+		"margin": 0.05
+	},
+	"cola_lowpoly": {
+		"path": "/models/lowpoly-room/cola_lowpoly.glb",
+		"w": 0.17,
+		"d": 0.15,
+		"h": 0.45,
+		"bbox_min": {
+			"x": -0.085,
+			"y": 0,
+			"z": -0.075
+		},
+		"bbox_max": {
+			"x": 0.085,
+			"y": 0.45,
+			"z": 0.075
+		},
+		"pivot": {
+			"x": 0,
+			"y": 0,
+			"z": 0
+		},
+		"anchors": {
+			"top_center": {
+				"x": 0,
+				"y": 0.45,
+				"z": 0
+			},
+			"center": {
+				"x": 0,
+				"y": 0.225,
+				"z": 0
+			}
+		},
+		"tags": ["cola", "lowpoly"],
+		"margin": 0.05
+	},
+	"dish_sweets_lowpoly": {
+		"path": "/models/lowpoly-room/dish_sweets_lowpoly.glb",
+		"w": 0.219,
+		"d": 0.219,
+		"h": 0.055,
+		"bbox_min": {
+			"x": -0.112,
+			"y": 0,
+			"z": -0.102
+		},
+		"bbox_max": {
+			"x": 0.107,
+			"y": 0.055,
+			"z": 0.117
+		},
+		"pivot": {
+			"x": -0.002,
+			"y": 0,
+			"z": 0.008
+		},
+		"anchors": {
+			"top_center": {
+				"x": -0.002,
+				"y": 0.055,
+				"z": 0.008
+			},
+			"center": {
+				"x": -0.002,
+				"y": 0.027,
+				"z": 0.008
+			}
+		},
+		"tags": ["dish", "sweets", "lowpoly"],
+		"margin": 0.05
+	},
+	"dish_watermelon_lowpoly": {
+		"path": "/models/lowpoly-room/dish_watermelon_lowpoly.glb",
+		"w": 0.103,
+		"d": 0.171,
+		"h": 0.069,
+		"bbox_min": {
+			"x": -0.052,
+			"y": 0,
+			"z": -0.08
+		},
+		"bbox_max": {
+			"x": 0.051,
+			"y": 0.069,
+			"z": 0.091
+		},
+		"pivot": {
+			"x": -0.001,
+			"y": 0,
+			"z": 0.006
+		},
+		"anchors": {
+			"top_center": {
+				"x": -0.001,
+				"y": 0.069,
+				"z": 0.006
+			},
+			"center": {
+				"x": -0.001,
+				"y": 0.034,
+				"z": 0.006
+			}
+		},
+		"tags": ["dish", "watermelon", "lowpoly"],
+		"margin": 0.05
+	},
+	"door_frame_white_lowpoly": {
+		"path": "/models/lowpoly-room/door_frame_white_lowpoly.glb",
+		"w": 1.341,
+		"d": 0.22,
+		"h": 2.415,
+		"bbox_min": {
+			"x": -0.093,
+			"y": 0,
+			"z": -0.11
+		},
+		"bbox_max": {
+			"x": 1.248,
+			"y": 2.415,
+			"z": 0.11
+		},
+		"pivot": {
+			"x": 0.577,
+			"y": 0,
+			"z": 0
+		},
+		"anchors": {
+			"top_center": {
+				"x": 0.577,
+				"y": 2.415,
+				"z": 0
+			},
+			"center": {
+				"x": 0.577,
+				"y": 1.207,
+				"z": 0
+			}
+		},
+		"tags": ["door", "frame", "white", "lowpoly"],
+		"margin": 0.05
+	},
+	"door_white_lowpoly": {
+		"path": "/models/lowpoly-room/door_white_lowpoly.glb",
+		"w": 1.098,
+		"d": 0.286,
+		"h": 2.269,
+		"bbox_min": {
+			"x": 0,
+			"y": 0,
+			"z": -0.143
+		},
+		"bbox_max": {
+			"x": 1.098,
+			"y": 2.269,
+			"z": 0.143
+		},
+		"pivot": {
+			"x": 0.549,
+			"y": 0,
+			"z": 0
+		},
+		"anchors": {
+			"top_center": {
+				"x": 0.549,
+				"y": 2.269,
+				"z": 0
+			},
+			"center": {
+				"x": 0.549,
+				"y": 1.134,
+				"z": 0
+			}
+		},
+		"tags": ["door", "white", "lowpoly"],
+		"margin": 0.05
+	},
+	"dresser_brown_lowpoly": {
+		"path": "/models/lowpoly-room/dresser_brown_lowpoly.glb",
+		"w": 1.189,
+		"d": 0.645,
+		"h": 1.02,
+		"bbox_min": {
+			"x": -0.594,
+			"y": 0,
+			"z": -0.267
+		},
+		"bbox_max": {
+			"x": 0.595,
+			"y": 1.02,
+			"z": 0.378
+		},
+		"pivot": {
+			"x": 0,
+			"y": 0,
+			"z": 0.055
+		},
+		"anchors": {
+			"top_center": {
+				"x": 0,
+				"y": 1.02,
+				"z": 0.055
+			},
+			"center": {
+				"x": 0,
+				"y": 0.51,
+				"z": 0.055
+			}
+		},
+		"tags": ["dresser", "brown", "lowpoly"],
+		"margin": 0.05
+	},
+	"dumbbell_heavy_lowpoly": {
+		"path": "/models/lowpoly-room/dumbbell_heavy_lowpoly.glb",
+		"w": 0.399,
+		"d": 0.233,
+		"h": 0.232,
+		"bbox_min": {
+			"x": -0.199,
+			"y": -0.116,
+			"z": -0.117
+		},
+		"bbox_max": {
+			"x": 0.2,
+			"y": 0.116,
+			"z": 0.117
+		},
+		"pivot": {
+			"x": 0.001,
+			"y": -0.116,
+			"z": 0
+		},
+		"anchors": {
+			"top_center": {
+				"x": 0.001,
+				"y": 0.116,
+				"z": 0
+			},
+			"center": {
+				"x": 0.001,
+				"y": 0,
+				"z": 0
+			}
+		},
+		"tags": ["dumbbell", "heavy", "lowpoly"],
+		"margin": 0.05
+	},
+	"dumbbell_lowpoly": {
+		"path": "/models/lowpoly-room/dumbbell_lowpoly.glb",
+		"w": 0.399,
+		"d": 0.232,
+		"h": 0.232,
+		"bbox_min": {
+			"x": -0.201,
+			"y": -0.116,
+			"z": -0.116
+		},
+		"bbox_max": {
+			"x": 0.198,
+			"y": 0.116,
+			"z": 0.116
+		},
+		"pivot": {
+			"x": -0.002,
+			"y": -0.116,
+			"z": 0
+		},
+		"anchors": {
+			"top_center": {
+				"x": -0.002,
+				"y": 0.116,
+				"z": 0
+			},
+			"center": {
+				"x": -0.002,
+				"y": 0,
+				"z": 0
+			}
+		},
+		"tags": ["dumbbell", "lowpoly"],
+		"margin": 0.05
+	},
+	"flower_pot_lowpoly": {
+		"path": "/models/lowpoly-room/flower_pot_lowpoly.glb",
+		"w": 0.348,
+		"d": 0.387,
+		"h": 0.272,
+		"bbox_min": {
+			"x": -0.168,
+			"y": 0,
+			"z": -0.203
+		},
+		"bbox_max": {
+			"x": 0.18,
+			"y": 0.272,
+			"z": 0.184
+		},
+		"pivot": {
+			"x": 0.006,
+			"y": 0,
+			"z": -0.01
+		},
+		"anchors": {
+			"top_center": {
+				"x": 0.006,
+				"y": 0.272,
+				"z": -0.01
+			},
+			"center": {
+				"x": 0.006,
+				"y": 0.136,
+				"z": -0.01
+			}
+		},
+		"tags": ["flower", "pot", "lowpoly"],
+		"margin": 0.05
+	},
+	"folded_clothes_lowpoly": {
+		"path": "/models/lowpoly-room/folded_clothes_lowpoly.glb",
+		"w": 0.595,
+		"d": 0.805,
+		"h": 0.087,
+		"bbox_min": {
+			"x": -0.278,
+			"y": -0.001,
+			"z": -0.394
+		},
+		"bbox_max": {
+			"x": 0.317,
+			"y": 0.086,
+			"z": 0.412
+		},
+		"pivot": {
+			"x": 0.019,
+			"y": -0.001,
+			"z": 0.009
+		},
+		"anchors": {
+			"top_center": {
+				"x": 0.019,
+				"y": 0.086,
+				"z": 0.009
+			},
+			"center": {
+				"x": 0.019,
+				"y": 0.042,
+				"z": 0.009
+			}
+		},
+		"tags": ["folded", "clothes", "lowpoly"],
+		"margin": 0.05
+	},
+	"fridge_grey_lowpoly": {
+		"path": "/models/lowpoly-room/fridge_grey_lowpoly.glb",
+		"w": 0.692,
+		"d": 0.722,
+		"h": 1.918,
+		"bbox_min": {
+			"x": -0.346,
+			"y": 0,
+			"z": -0.306
+		},
+		"bbox_max": {
+			"x": 0.346,
+			"y": 1.918,
+			"z": 0.416
+		},
+		"pivot": {
+			"x": 0,
+			"y": 0,
+			"z": 0.055
+		},
+		"anchors": {
+			"top_center": {
+				"x": 0,
+				"y": 1.918,
+				"z": 0.055
+			},
+			"center": {
+				"x": 0,
+				"y": 0.959,
+				"z": 0.055
+			}
+		},
+		"tags": ["fridge", "grey", "lowpoly"],
+		"margin": 0.05
+	},
+	"ketchup_bottle_lowpoly": {
+		"path": "/models/lowpoly-room/ketchup_bottle_lowpoly.glb",
+		"w": 0.072,
+		"d": 0.083,
+		"h": 0.273,
+		"bbox_min": {
+			"x": -0.036,
+			"y": 0,
+			"z": -0.041
+		},
+		"bbox_max": {
+			"x": 0.036,
+			"y": 0.273,
+			"z": 0.042
+		},
+		"pivot": {
+			"x": 0,
+			"y": 0,
+			"z": 0
+		},
+		"anchors": {
+			"top_center": {
+				"x": 0,
+				"y": 0.273,
+				"z": 0
+			},
+			"center": {
+				"x": 0,
+				"y": 0.137,
+				"z": 0
+			}
+		},
+		"tags": ["ketchup", "bottle", "lowpoly"],
+		"margin": 0.05
+	},
+	"kitchen_chair_lowpoly": {
+		"path": "/models/lowpoly-room/kitchen_chair_lowpoly.glb",
+		"w": 0.546,
+		"d": 0.534,
+		"h": 0.827,
+		"bbox_min": {
+			"x": -0.273,
+			"y": 0,
+			"z": -0.316
+		},
+		"bbox_max": {
+			"x": 0.273,
+			"y": 0.827,
+			"z": 0.218
+		},
+		"pivot": {
+			"x": 0,
+			"y": 0,
+			"z": -0.049
+		},
+		"anchors": {
+			"top_center": {
+				"x": 0,
+				"y": 0.827,
+				"z": -0.049
+			},
+			"center": {
+				"x": 0,
+				"y": 0.414,
+				"z": -0.049
+			}
+		},
+		"tags": ["kitchen", "chair", "lowpoly"],
+		"margin": 0.05
+	},
+	"kitchen_sink_small_silver_lowpoly": {
+		"path": "/models/lowpoly-room/kitchen_sink_small_silver_lowpoly.glb",
+		"w": 1.083,
+		"d": 0.957,
+		"h": 1.709,
+		"bbox_min": {
+			"x": -0.529,
+			"y": 0,
+			"z": -0.48
+		},
+		"bbox_max": {
+			"x": 0.553,
+			"y": 1.709,
+			"z": 0.477
+		},
+		"pivot": {
+			"x": 0.012,
+			"y": 0,
+			"z": -0.001
+		},
+		"anchors": {
+			"top_center": {
+				"x": 0.012,
+				"y": 1.709,
+				"z": -0.001
+			},
+			"center": {
+				"x": 0.012,
+				"y": 0.854,
+				"z": -0.001
+			}
+		},
+		"tags": ["kitchen", "sink", "small", "silver", "lowpoly"],
+		"margin": 0.05
+	},
+	"kitchen_table_lowpoly": {
+		"path": "/models/lowpoly-room/kitchen_table_lowpoly.glb",
+		"w": 2.608,
+		"d": 0.853,
+		"h": 1.036,
+		"bbox_min": {
+			"x": -1.288,
+			"y": 0,
+			"z": -0.419
+		},
+		"bbox_max": {
+			"x": 1.32,
+			"y": 1.036,
+			"z": 0.434
+		},
+		"pivot": {
+			"x": 0.016,
+			"y": 0,
+			"z": 0.007
+		},
+		"anchors": {
+			"top_center": {
+				"x": 0.016,
+				"y": 1.036,
+				"z": 0.007
+			},
+			"center": {
+				"x": 0.016,
+				"y": 0.518,
+				"z": 0.007
+			}
+		},
+		"tags": ["kitchen", "table", "lowpoly"],
+		"margin": 0.05
+	},
+	"lamp_big_lowpoly": {
+		"path": "/models/lowpoly-room/lamp_big_lowpoly.glb",
+		"w": 0.7,
+		"d": 0.68,
+		"h": 1.852,
+		"bbox_min": {
+			"x": -0.384,
+			"y": -0.004,
+			"z": -0.362
+		},
+		"bbox_max": {
+			"x": 0.316,
+			"y": 1.848,
+			"z": 0.318
+		},
+		"pivot": {
+			"x": -0.034,
+			"y": -0.004,
+			"z": -0.022
+		},
+		"anchors": {
+			"top_center": {
+				"x": -0.034,
+				"y": 1.848,
+				"z": -0.022
+			},
+			"center": {
+				"x": -0.034,
+				"y": 0.922,
+				"z": -0.022
+			}
+		},
+		"tags": ["lamp", "big", "lowpoly"],
+		"margin": 0.05
+	},
+	"lamp_small_lowpoly": {
+		"path": "/models/lowpoly-room/lamp_small_lowpoly.glb",
+		"w": 0.302,
+		"d": 0.302,
+		"h": 0.558,
+		"bbox_min": {
+			"x": -0.151,
+			"y": 0,
+			"z": -0.151
+		},
+		"bbox_max": {
+			"x": 0.151,
+			"y": 0.558,
+			"z": 0.151
+		},
+		"pivot": {
+			"x": 0,
+			"y": 0,
+			"z": 0
+		},
+		"anchors": {
+			"top_center": {
+				"x": 0,
+				"y": 0.558,
+				"z": 0
+			},
+			"center": {
+				"x": 0,
+				"y": 0.279,
+				"z": 0
+			}
+		},
+		"tags": ["lamp", "small", "lowpoly"],
+		"margin": 0.05
+	},
+	"laundry_bin_lowpoly": {
+		"path": "/models/lowpoly-room/laundry_bin_lowpoly.glb",
+		"w": 0.46,
+		"d": 0.472,
+		"h": 0.771,
+		"bbox_min": {
+			"x": -0.23,
+			"y": 0,
+			"z": -0.236
+		},
+		"bbox_max": {
+			"x": 0.23,
+			"y": 0.771,
+			"z": 0.236
+		},
+		"pivot": {
+			"x": 0,
+			"y": 0,
+			"z": 0
+		},
+		"anchors": {
+			"top_center": {
+				"x": 0,
+				"y": 0.771,
+				"z": 0
+			},
+			"center": {
+				"x": 0,
+				"y": 0.386,
+				"z": 0
+			}
+		},
+		"tags": ["laundry", "bin", "lowpoly"],
+		"margin": 0.05
+	},
+	"lounge_chair_brown_lowpoly": {
+		"path": "/models/lowpoly-room/lounge_chair_brown_lowpoly.glb",
+		"w": 0.658,
+		"d": 0.7,
+		"h": 0.94,
+		"bbox_min": {
+			"x": -0.328,
+			"y": -0.004,
+			"z": -0.342
+		},
+		"bbox_max": {
+			"x": 0.329,
+			"y": 0.936,
+			"z": 0.357
+		},
+		"pivot": {
+			"x": 0,
+			"y": -0.004,
+			"z": 0.008
+		},
+		"anchors": {
+			"top_center": {
+				"x": 0,
+				"y": 0.936,
+				"z": 0.008
+			},
+			"center": {
+				"x": 0,
+				"y": 0.466,
+				"z": 0.008
+			}
+		},
+		"tags": ["lounge", "chair", "brown", "lowpoly"],
+		"margin": 0.05
+	},
+	"microwave_oven_lowpoly": {
+		"path": "/models/lowpoly-room/microwave_oven_lowpoly.glb",
+		"w": 0.515,
+		"d": 0.42,
+		"h": 0.263,
+		"bbox_min": {
+			"x": -0.257,
+			"y": 0,
+			"z": -0.182
+		},
+		"bbox_max": {
+			"x": 0.257,
+			"y": 0.263,
+			"z": 0.238
+		},
+		"pivot": {
+			"x": 0,
+			"y": 0,
+			"z": 0.028
+		},
+		"anchors": {
+			"top_center": {
+				"x": 0,
+				"y": 0.263,
+				"z": 0.028
+			},
+			"center": {
+				"x": 0,
+				"y": 0.131,
+				"z": 0.028
+			}
+		},
+		"tags": ["microwave", "oven", "lowpoly"],
+		"margin": 0.05
+	},
+	"office_table_black_red_lowpoly": {
+		"path": "/models/lowpoly-room/office_table_black_red_lowpoly.glb",
+		"w": 1.585,
+		"d": 0.663,
+		"h": 0.729,
+		"bbox_min": {
+			"x": -0.79,
+			"y": 0,
+			"z": -0.308
+		},
+		"bbox_max": {
+			"x": 0.795,
+			"y": 0.729,
+			"z": 0.355
+		},
+		"pivot": {
+			"x": 0.002,
+			"y": 0,
+			"z": 0.024
+		},
+		"anchors": {
+			"top_center": {
+				"x": 0.002,
+				"y": 0.729,
+				"z": 0.024
+			},
+			"center": {
+				"x": 0.002,
+				"y": 0.365,
+				"z": 0.024
+			}
+		},
+		"tags": ["office", "table", "black", "red", "lowpoly"],
+		"margin": 0.05
+	},
+	"paper_box_lowpoly": {
+		"path": "/models/lowpoly-room/paper_box_lowpoly.glb",
+		"w": 0.262,
+		"d": 0.305,
+		"h": 0.331,
+		"bbox_min": {
+			"x": -0.131,
+			"y": 0,
+			"z": -0.153
+		},
+		"bbox_max": {
+			"x": 0.131,
+			"y": 0.331,
+			"z": 0.153
+		},
+		"pivot": {
+			"x": 0,
+			"y": 0,
+			"z": 0
+		},
+		"anchors": {
+			"top_center": {
+				"x": 0,
+				"y": 0.331,
+				"z": 0
+			},
+			"center": {
+				"x": 0,
+				"y": 0.166,
+				"z": 0
+			}
+		},
+		"tags": ["paper", "box", "lowpoly"],
+		"margin": 0.05
+	},
+	"piano_black_lowpoly": {
+		"path": "/models/lowpoly-room/piano_black_lowpoly.glb",
+		"w": 1.245,
+		"d": 0.312,
+		"h": 1.008,
+		"bbox_min": {
+			"x": -0.622,
+			"y": 0,
+			"z": -0.166
+		},
+		"bbox_max": {
+			"x": 0.622,
+			"y": 1.008,
+			"z": 0.146
+		},
+		"pivot": {
+			"x": 0,
+			"y": 0,
+			"z": -0.01
+		},
+		"anchors": {
+			"top_center": {
+				"x": 0,
+				"y": 1.008,
+				"z": -0.01
+			},
+			"center": {
+				"x": 0,
+				"y": 0.504,
+				"z": -0.01
+			}
+		},
+		"tags": ["piano", "black", "lowpoly"],
+		"margin": 0.05
+	},
+	"plastic_water_lowpoly": {
+		"path": "/models/lowpoly-room/plastic_water_lowpoly.glb",
+		"w": 0.08,
+		"d": 0.09,
+		"h": 0.296,
+		"bbox_min": {
+			"x": -0.04,
+			"y": 0,
+			"z": -0.045
+		},
+		"bbox_max": {
+			"x": 0.04,
+			"y": 0.296,
+			"z": 0.045
+		},
+		"pivot": {
+			"x": 0,
+			"y": 0,
+			"z": 0
+		},
+		"anchors": {
+			"top_center": {
+				"x": 0,
+				"y": 0.296,
+				"z": 0
+			},
+			"center": {
+				"x": 0,
+				"y": 0.148,
+				"z": 0
+			}
+		},
+		"tags": ["plastic", "water", "lowpoly"],
+		"margin": 0.05
+	},
+	"preacher_curl_lowpoly": {
+		"path": "/models/lowpoly-room/preacher_curl_lowpoly.glb",
+		"w": 1.142,
+		"d": 1.285,
+		"h": 1.09,
+		"bbox_min": {
+			"x": -0.571,
+			"y": 0,
+			"z": -0.645
+		},
+		"bbox_max": {
+			"x": 0.571,
+			"y": 1.09,
+			"z": 0.639
+		},
+		"pivot": {
+			"x": 0,
+			"y": 0,
+			"z": -0.003
+		},
+		"anchors": {
+			"top_center": {
+				"x": 0,
+				"y": 1.09,
+				"z": -0.003
+			},
+			"center": {
+				"x": 0,
+				"y": 0.545,
+				"z": -0.003
+			}
+		},
+		"tags": ["preacher", "curl", "lowpoly"],
+		"margin": 0.05
+	},
+	"red_jacket_lowpoly": {
+		"path": "/models/lowpoly-room/red_jacket_lowpoly.glb",
+		"w": 0.641,
+		"d": 0.213,
+		"h": 0.947,
+		"bbox_min": {
+			"x": -0.315,
+			"y": -0.922,
+			"z": -0.095
+		},
+		"bbox_max": {
+			"x": 0.326,
+			"y": 0.024,
+			"z": 0.118
+		},
+		"pivot": {
+			"x": 0.005,
+			"y": -0.922,
+			"z": 0.012
+		},
+		"anchors": {
+			"top_center": {
+				"x": 0.005,
+				"y": 0.024,
+				"z": 0.012
+			},
+			"center": {
+				"x": 0.005,
+				"y": -0.449,
+				"z": 0.012
+			}
+		},
+		"tags": ["red", "jacket", "lowpoly"],
+		"margin": 0.05
+	},
+	"sofa_blue_lowpoly": {
+		"path": "/models/lowpoly-room/sofa_blue_lowpoly.glb",
+		"w": 1.968,
+		"d": 0.949,
+		"h": 0.779,
+		"bbox_min": {
+			"x": -0.984,
+			"y": 0,
+			"z": -0.518
+		},
+		"bbox_max": {
+			"x": 0.984,
+			"y": 0.779,
+			"z": 0.431
+		},
+		"pivot": {
+			"x": 0,
+			"y": 0,
+			"z": -0.043
+		},
+		"anchors": {
+			"top_center": {
+				"x": 0,
+				"y": 0.779,
+				"z": -0.043
+			},
+			"center": {
+				"x": 0,
+				"y": 0.389,
+				"z": -0.043
+			}
+		},
+		"tags": ["sofa", "blue", "lowpoly"],
+		"margin": 0.05
+	},
+	"toy_car_lowpoly": {
+		"path": "/models/lowpoly-room/toy_car_lowpoly.glb",
+		"w": 0.303,
+		"d": 0.59,
+		"h": 0.377,
+		"bbox_min": {
+			"x": -0.151,
+			"y": 0,
+			"z": -0.303
+		},
+		"bbox_max": {
+			"x": 0.152,
+			"y": 0.376,
+			"z": 0.288
+		},
+		"pivot": {
+			"x": 0,
+			"y": 0,
+			"z": -0.007
+		},
+		"anchors": {
+			"top_center": {
+				"x": 0,
+				"y": 0.376,
+				"z": -0.007
+			},
+			"center": {
+				"x": 0,
+				"y": 0.188,
+				"z": -0.007
+			}
+		},
+		"tags": ["toy", "car", "lowpoly"],
+		"margin": 0.05
+	},
+	"toy_draw_board_lowpoly": {
+		"path": "/models/lowpoly-room/toy_draw_board_lowpoly.glb",
+		"w": 0.801,
+		"d": 0.443,
+		"h": 1.799,
+		"bbox_min": {
+			"x": -0.4,
+			"y": 0,
+			"z": -0.221
+		},
+		"bbox_max": {
+			"x": 0.4,
+			"y": 1.799,
+			"z": 0.223
+		},
+		"pivot": {
+			"x": 0,
+			"y": 0,
+			"z": 0.001
+		},
+		"anchors": {
+			"top_center": {
+				"x": 0,
+				"y": 1.799,
+				"z": 0.001
+			},
+			"center": {
+				"x": 0,
+				"y": 0.899,
+				"z": 0.001
+			}
+		},
+		"tags": ["toy", "draw", "board", "lowpoly"],
+		"margin": 0.05
+	},
+	"tv_wall_lowpoly": {
+		"path": "/models/lowpoly-room/tv_wall_lowpoly.glb",
+		"w": 3.036,
+		"d": 0.42,
+		"h": 1.694,
+		"bbox_min": {
+			"x": -1.498,
+			"y": -0.001,
+			"z": -0.171
+		},
+		"bbox_max": {
+			"x": 1.538,
+			"y": 1.693,
+			"z": 0.25
+		},
+		"pivot": {
+			"x": 0.02,
+			"y": -0.001,
+			"z": 0.04
+		},
+		"anchors": {
+			"top_center": {
+				"x": 0.02,
+				"y": 1.693,
+				"z": 0.04
+			},
+			"center": {
+				"x": 0.02,
+				"y": 0.846,
+				"z": 0.04
+			}
+		},
+		"tags": ["tv", "wall", "lowpoly"],
+		"margin": 0.05
+	},
+	"washing_machine_white_lowpoly": {
+		"path": "/models/lowpoly-room/washing_machine_white_lowpoly.glb",
+		"w": 0.599,
+		"d": 0.529,
+		"h": 0.857,
+		"bbox_min": {
+			"x": -0.299,
+			"y": 0,
+			"z": -0.253
+		},
+		"bbox_max": {
+			"x": 0.299,
+			"y": 0.857,
+			"z": 0.276
+		},
+		"pivot": {
+			"x": 0,
+			"y": 0,
+			"z": 0.011
+		},
+		"anchors": {
+			"top_center": {
+				"x": 0,
+				"y": 0.857,
+				"z": 0.011
+			},
+			"center": {
+				"x": 0,
+				"y": 0.428,
+				"z": 0.011
+			}
+		},
+		"tags": ["washing", "machine", "white", "lowpoly"],
+		"margin": 0.05
+	},
+	"weight_rack_lowpoly": {
+		"path": "/models/lowpoly-room/weight_rack_lowpoly.glb",
+		"w": 0.529,
+		"d": 0.962,
+		"h": 1.279,
+		"bbox_min": {
+			"x": -0.259,
+			"y": 0,
+			"z": -0.481
+		},
+		"bbox_max": {
+			"x": 0.27,
+			"y": 1.279,
+			"z": 0.482
+		},
+		"pivot": {
+			"x": 0.005,
+			"y": 0,
+			"z": 0.001
+		},
+		"anchors": {
+			"top_center": {
+				"x": 0.005,
+				"y": 1.279,
+				"z": 0.001
+			},
+			"center": {
+				"x": 0.005,
+				"y": 0.639,
+				"z": 0.001
+			}
+		},
+		"tags": ["weight", "rack", "lowpoly"],
+		"margin": 0.05
+	}
+}
