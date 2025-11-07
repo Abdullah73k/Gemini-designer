@@ -1,4 +1,4 @@
-# RoomCrafter AI — Text → 3D room layouts in seconds
+# Gemini Design Studio → 3D room layouts in seconds
 
 ## Hackathon Context
 Built at **DeltaHacks Lite** in ~**1.5 hours**. The focus was a working end‑to‑end pipeline for “Best use of Gemini”: natural‑language room descriptions → strict JSON layout → live 3D scene.
