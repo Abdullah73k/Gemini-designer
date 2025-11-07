@@ -12,19 +12,17 @@ Built at **DeltaHacks Lite** in ~**1.5 hours**. The focus was a working end‑to
 - 3D asset pipeline: GLB models → metadata script → `public/models.json`.
 - Retriever: select top‑K candidate models (from `models.json`) to keep the prompt compact.
 - Gemini via Vercel AI SDK: system prompt enforces a strict `LayoutResponse` schema.
-- API route: Next.js App Router endpoint (`/api/generate` — see note below).
+- API route: Next.js App Router endpoint (`/api/chat` — see note below).
 - Sanitizer: grid snap (0.1m), clamp to room, simple AABB separation, set floor Y = h/2 when missing.
 - UI: Left = chat (useChat), Right = live 3D (react‑three‑fiber + drei).
 
 ```
 Text prompt → Retriever (top‑K from models.json) → Gemini (strict JSON)
-           → /api/generate → Sanitize → Viewer (GLB load) → 3D scene
+           → /api/chat → Sanitize → Viewer (GLB load) → 3D scene
 ```
 
-Note: This repo currently exposes `/api/chat` (used by the UI) and also contains `/api/generate` from an earlier iteration. TODO: unify on one route name.
-
 ## models.json (How It’s Produced & Used)
-A small Node script (not included here — see TODO) scans low‑poly GLBs and precomputes a manifest at `public/models.json` with fields:
+A small Node script (not included here) scans low‑poly GLBs and precomputes a manifest at `public/models.json` with fields:
 
 | field | purpose |
 |---|---|
@@ -46,11 +44,10 @@ A small Node script (not included here — see TODO) scans low‑poly GLBs and p
   - `room` { `width_m`, `depth_m`, `height_m`, `floor_material?`, `wall_color?` }
   - `objects[]` { `id`, `type?`, `model: "gltf:<key>"`, `position_m`, `rotation_deg`, ... }
   - `rationale` short string
-- Model is configurable via env. Suggested: **Gemini 1.5** variants (Pro/Flash) for large context + creative placement. Temperature controls creativity.
+- Model is configurable via env. Suggested: **Gemini 2.0** Flash for large context + creative placement. Temperature controls creativity.
 
 ## Backend (Next.js App Router)
 - Primary route in this repo: `src/app/api/chat/route.ts` (UI calls this).
-- Earlier spec/compat route also exists: `src/app/api/generate/route.ts`.
 - Responsibilities:
   - Validate request, load `public/models.json`.
   - Retrieve top‑K candidates; build a strict, placement‑aware system prompt.
@@ -60,20 +57,16 @@ A small Node script (not included here — see TODO) scans low‑poly GLBs and p
   - Return `{ ok, data | error }`.
 - Env:
   - `GOOGLE_GENERATIVE_AI_API_KEY` (required).
-  - `GEMINI_MODEL` (optional; defaults to `models/gemini-1.5-flash`).
-  - TODO: Document any rate limits or quotas for the chosen model.
+  - `GEMINI_MODEL` (optional; defaults to `gemini-2.0-flash`).
 
 ## Frontend (UI + 3D)
 - Left panel (≈30%): `useChat` UI (Vercel AI SDK UI). Custom submit posts JSON to `/api/chat`, shows pretty JSON, and dispatches `layout:update` on success.
 - Right panel (≈70%): `react-three-fiber` viewer:
   - Canvas + ambient/directional lights (no black scene) + light gray floor sized to room.
   - GLB loading using `models.json.path`. If `position_m.y` missing, viewer sets `y = h/2`.
-  - Optional primitives when `construction` is provided (boxes/cylinders/planes).
-  - Updates live via a `window` CustomEvent: `layout:update`.
 
 ## Repo Layout (Brief)
 - `src/app/api/chat/route.ts` — current API used by the UI.
-- `src/app/api/generate/route.ts` — earlier route matching the spec.
 - `src/components/RoomUI/*` — Chat/UI and viewer panel.
 - `src/components/Three/*` — `RoomViewer`, `SceneObjects`, `GLTFModel`, `PrimitiveBuilder`.
 - `src/lib/*` — `models` (manifest I/O), `retriever`, `geminiClient`, `modelLoader`.
@@ -93,28 +86,14 @@ Env (create `.env.local`):
 # Google provider key for Gemini (used by @ai-sdk/google)
 GOOGLE_GENERATIVE_AI_API_KEY=your_key_here
 # Optional: override the default model
-GEMINI_MODEL=models/gemini-1.5-flash
+GEMINI_MODEL=gemini-2.0-flash
 ```
 
 Run:
 ```bash
-pnpm dev
+pnpm run dev
 ```
 Open: http://localhost:3000
-
-## Quick Test
-- In the left panel, try: “Cozy low‑poly gaming room with desk, chair, bookshelf.”
-- Expect: JSON response + 3D with floor + lights + GLBs from `/public/models/lowpoly-room`.
-- If the scene is dark/empty: open DevTools and confirm:
-  - The viewer logs a resolved path like `/models/lowpoly-room/desk_basic.glb`.
-  - Opening that URL serves a GLB.
-  - `public/models.json` paths start with `/models/...`.
-
-## Troubleshooting
-- Black scene: ensure the ambient/directional lights exist; the Canvas background is not pure black.
-- Model not found: missing key in `models.json` or wrong path (should start with `/models/`).
-- Invalid JSON: system prompt enforces JSON‑only; the route has a regex/fenced fallback parser.
-- Overlaps/spacing: sanitizer snaps/clamps and applies a simple AABB nudge; reduce item count if still dense.
 
 ## Constraints & Future Work
 - Time‑boxed hackathon prototype (1.5h): small catalog, minimal sanitizer, no walls/HDRI.
@@ -122,11 +101,10 @@ Open: http://localhost:3000
   - Scripted manifest generator (CLI) — TODO: add `scripts/build-models-json.ts`.
   - Larger catalogs + richer anchors/walls.
   - Export screenshots/GLTF; budgeting/constraints; better lighting/materials.
-  - Unify on `/api/chat` or `/api/generate`.
 
 ## Credits
 - Built at **DeltaHacks Lite**. Thanks to the organizers and mentors.
 - Libraries: **Next.js**, **Vercel AI SDK**, **@ai-sdk/google**, **react‑three‑fiber**, **drei**, **Tailwind**/**shadcn/ui**.
 
-— Thanks for reading! Devpost: (link coming soon)
+— Thanks for reading! Devpost: https://devpost.com/software/gemini-layout-studio?ref_content=my-projects-tab&ref_feature=my_projects
 
