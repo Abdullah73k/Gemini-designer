@@ -1,5 +1,7 @@
 # Gemini Design Studio → 3D room layouts in seconds
 
+<img align="right" src="./public/readme-hero.png" alt="Gemini Design Studio preview" width="720" />
+
 ## Hackathon Context
 Built at **DeltaHacks Lite** in ~**1.5 hours**. The focus was a working end‑to‑end pipeline for “Best use of Gemini”: natural‑language room descriptions → strict JSON layout → live 3D scene.
 
@@ -107,4 +109,3 @@ Open: http://localhost:3000
 - Libraries: **Next.js**, **Vercel AI SDK**, **@ai-sdk/google**, **react‑three‑fiber**, **drei**, **Tailwind**/**shadcn/ui**.
 
 — Thanks for reading! Devpost: https://devpost.com/software/gemini-layout-studio?ref_content=my-projects-tab&ref_feature=my_projects
-
